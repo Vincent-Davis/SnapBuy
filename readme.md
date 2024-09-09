@@ -39,70 +39,57 @@
 
 <h2>2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.</h2>
 
-                        Client (Browser)
-                               |
-                               v
-               1. Mengirimkan request ke server
-                               |
-                               v
+                    Client (Browser)
+                           |
+                           v
+             1. Mengirimkan request ke server
+                           |
+                           v
           2. URL Routing (urls.py)
-          -----------------------------------------
-          |                                       |
-   **Root Project (app/urls.py)**           **Application (main/urls.py)**
-   - Berfungsi sebagai pengendali          - Berfungsi untuk menangani URL
-     utama untuk project.                    yang spesifik untuk aplikasi.
-   - Mendistribusikan request dari         - Mengarah ke views.py untuk aplikasi
-     URL global ke aplikasi-aplikasi         tertentu (misalnya aplikasi 'main').
-     di dalam project, menggunakan         - Di sinilah route spesifik aplikasi
-     fungsi `include()` untuk               diatur, misalnya:
-     menyertakan `urls.py` dari aplikasi      - path('', show_main) untuk menampilkan
-     tertentu.                                halaman utama aplikasi.
-   - Misalnya: `path('', include('main.urls'))` |
-   artinya URL `http://domain.com/` akan       |
-   diteruskan ke `urls.py` di aplikasi         |
-   `main`.                                     |
-          -----------------------------------------       
-                               |
-                               v
-                    3. View Processing (views.py)
-                   - View berfungsi untuk menangani logika bisnis.
-                   - View mengambil data yang dibutuhkan dari model
-                     (jika diperlukan), memprosesnya, dan menyiapkan 
-                     data dalam bentuk dictionary `context` untuk
-                     dikirim ke template.
-                   - Misalnya, view `show_main` memproses request
-                     untuk halaman utama dan menyiapkan data seperti
-                     `nama`, `kelas`, dan `nama aplikasi`.
-                               |
-                               v
-             4. Interaction with Model (models.py)
-            - Jika view membutuhkan data dari database, model akan
-              dipanggil. Model dalam Django merepresentasikan tabel
-              dalam database dan mengatur bagaimana data diambil,
-              dimodifikasi, atau disimpan.
-            - Dalam project ini, model `ProductEntry` adalah tabel
-              yang merepresentasikan produk, dengan kolom seperti
-              `nama`, `price`, `description`, `produk_terjual`, dan
-              `rating`.
-                               |
-                               v
-                  5. Rendering Template (HTML)
-            - Setelah view memproses data, template HTML digunakan
-              untuk menampilkan data tersebut dalam halaman web.
-            - Template menggunakan Django Template Language (DTL)
-              untuk menyisipkan data dari context yang dikirim oleh
-              view ke dalam halaman HTML.
-            - Misalnya, dalam template, data seperti `{{ aplikasi }}`,
-              `{{ nama }}`, dan `{{ kelas }}` ditampilkan di halaman.
-                               |
-                               v
-               6. Response (HTML) dikirim kembali ke client
-            - Setelah template dirender, HTML dikirim sebagai response
-              ke browser client, yang kemudian menampilkan halaman web
-              sesuai dengan data yang diproses.
-                               |
-                               v
-                  Client (Browser menampilkan halaman)
+          -------------------------------------------
+          |                                         |
+    Root Project (app/urls.py)                 Application (main/urls.py)
+    - Bertugas mendistribusikan                - Menangani URL yang spesifik
+      request ke aplikasi-aplikasi               untuk aplikasi tertentu.
+      yang ada di project.                     - Misalnya: URL utama '' diarahkan
+    - Menggunakan include() untuk                ke fungsi show_main di views.py.
+      memetakan URL global ke aplikasi.         ---------------------------------
+    - Contoh: path('', include('main.urls'))    |
+      untuk mengarahkan request                 |
+      ke aplikasi 'main'.                       v
+          -------------------------------------------
+                           |
+                           v
+             3. View Processing (views.py)
+            - Memproses request dan mengambil data
+              dari model (jika diperlukan).
+            - Menyiapkan data dalam bentuk context untuk
+              dikirim ke template.
+            - Contoh: Menyiapkan context berisi nama, kelas,
+              dan nama aplikasi.
+                           |
+                           v
+         4. Interaction with Model (models.py)
+            - Jika view memerlukan data dari database,
+              model akan dipanggil untuk mengambil atau
+              memodifikasi data.
+            - Misalnya: ProductEntry adalah model yang merepresentasikan
+              produk dengan kolom nama, price, description, dsb.
+                           |
+                           v
+               5. Rendering Template (HTML)
+            - Template HTML akan merender data dari context yang
+              dikirim oleh views.
+            - Contoh: Menampilkan variabel {{ nama }}, {{ kelas }},
+              dan {{ aplikasi }} pada halaman web.
+                           |
+                           v
+          6. Response (HTML) dikirim kembali ke client
+            - Setelah template dirender, response dikirimkan
+              kembali ke browser client.
+                           |
+                           v
+             Client (Browser menampilkan halaman)
 
 
 
