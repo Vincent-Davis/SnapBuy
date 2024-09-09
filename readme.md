@@ -1,4 +1,4 @@
-<h1> 1.Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h1>
+<h2> 1.Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
 
 * Membuat proyek Django baru
     1. Membuat direktori folder baru bernama Snap Buy
@@ -37,36 +37,62 @@
 * Github
     1. Push local git ke github 
 
-<h1>2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.</h1>
+<h2>2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.</h2>
 
-Berikut adalah bagan yang berisi request client ke web berbasis Django
-1. Mengirimkan request ke server
-2. URL Routing (urls.py)  
-   - Berfungsi untuk memetakan URL yang diminta pengguna ke views.py
-3. View Processing (views.py)
-   - Memproses request dan menentukan data apa yang akan ditampilkan ke pengguna.
-   - Data berupa dictionary context disiapkan untuk dikirim ke template, dalam project ini contohnya adalah nama, kelas, dan nama aplikasi
-4. Interaction with Model (models.py)
-   - File ini adalah file yang mendefinisikan model dan merepresentasikan tabel dalam database.
-   - Dalam contoh ini, Class ProductEntry adalah tabel produknya, dan nama, price, descritpion, produk_terjual, dan rating adalah nama kolom dalam database.
-5. Rendering Template (HTML)
-   - File ini menampilkan data ke user dalam bentuk halaman web. Data yang ada di views nantinya akan di integrasikan dengan halaman web.
-   - Pada kasus ini, nilai - nilai pada dictionary context pada views.py didapatkan dengan menulis {{aplikasi}}, {{nama}}, {{kelas}}
-6. Response (HTML) dikirim kembali ke client
-   - Client mendapatkan web page yang sesuai
+                    Client (Browser)
+                           |
+                           v
+            1. Mengirimkan request ke server
+                           |
+                           v
+               2. URL Routing (urls.py)
+               -------------------------------------
+               |                                   |
+         **Root Project (root/urls.py)**         **Application (main/urls.py)**
+         - Berfungsi untuk memetakan URL       - Memetakan URL khusus aplikasi
+           ke aplikasi yang ada dalam           tertentu, di sini aplikasi
+           project (seperti main).               'main'.
+         - Menggunakan fungsi `include()`      - Mengarahkan ke view spesifik
+           untuk mengarahkan ke aplikasi         dalam aplikasi 'main'.
+           tertentu.                           --------------------------------
+         -------------------------------------           |
+                           |                            v
+                           |                    Arahkan ke views.py
+                           v
+             3. View Processing (views.py)
+            - Memproses request dan menentukan data apa yang akan ditampilkan ke pengguna.
+            - Data berupa dictionary context disiapkan untuk dikirim ke template.
+            - Contoh: nama, kelas, dan nama aplikasi.
+                           |
+                           v
+          4. Interaction with Model (models.py)
+            - Model mendefinisikan tabel dalam database.
+            - Contoh: Class ProductEntry adalah tabel produk.
+            - Kolom: nama, price, description, produk_terjual, rating.
+                           |
+                           v
+              5. Rendering Template (HTML)
+            - Template menampilkan data ke user dalam halaman web.
+            - Menggunakan variabel seperti {{ aplikasi }}, {{ nama }}, {{ kelas }}.
+                           |
+                           v
+          6. Response (HTML) dikirim kembali ke client
+                           |
+                           v
+               Client (Browser menampilkan halaman)
 
 
-<h1>3. Jelaskan fungsi git dalam pengembangan perangkat lunak!</h1>
+<h2>3. Jelaskan fungsi git dalam pengembangan perangkat lunak!</h2>
 Dalam sebuah pengembangan perangkat lunak, git memiliki banyak fungsi 
 1. Kolaborasi Tim
 Git sangat membantu dalam sebuah proses pengembangan perangkat lunak yang dilakukan oleh lebih 1 orang. Keberadaan git membantu programmer untuk bisa bekerja di cabang yang berbeda tanpa mengganggu proyek satu sama lain. Nantinya, setelah selesai, cabang - cabang tersebut bisa di merge.
 2. Backup dan Commit tracking
 Dalam sebuah pengembangan, umum terjadi sebuah kesalahan ketika melakukan perubahan. Keberadaan git menjadi sebuah penjamin keamanan, karena kita bisa kembali ke versi yang kita save sebelumnya. Selain itu, keberadaan git juga menjadi jawaban dari kehilangan file, karena keberadan git memastikan kita mempunyai sebuah backup yang dapat digunakan.
 
-<h1>4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?</h1>
+<h2>4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?</h2>
 
 Menurut saya, Django sering dijadikan pilihan untuk memulai pembelajaran pengembangan perangkat lunak karena pertama dia berbasis Python, yang mudah dipahami. Django juga  menyediakan banyak fitur - fitur yang bermanfaat seperti autentikasi, ORM, dan admin panel. Framework dari django juga mengikuti pola MTV, dan memiliki dokumentasi yang lengkap. Hal ini tentu akan sangat membantu bagi para mahasiswa dalam memahami konsep pembuatan proyek web. Django juga mempunyai community support yang cukup baik, mengingat besarnya komunitas Django.
 
-<h1>5. Mengapa model pada Django disebut sebagai ORM?</h1>
+<h2>5. Mengapa model pada Django disebut sebagai ORM?</h2>
 
 Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena django memetakan objek - objek di dalam python ke tabel database relational, seperti SQL. Dengan ORM, pengembang dapat bekerja dengan database dengan menggunakan bahasa python tanpa menggunakan bahasa SQL sama sekali. ORM akan mengubah query database menjadi objek python, dan hal sebaliknya juga berlaku.
