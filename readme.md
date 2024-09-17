@@ -1,3 +1,68 @@
+<h1>TUGAS 3 </h1>
+<h2>1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?</h2>
+1. Komunikasi antar komponen 
+Dalam sebuah platform, tidak jarang kalau berbagai komponen dari platform, seperti layanan dan modul, harus saling berinteraksi agar fungsinya bisa berjalan normal. Data delivery memastikan setiap komponen mendapatkan informasi yang tepat di waktu yang tepat, sekalipun komponen - komponen tersebut berada di lokasi dan server yang berbeda. Misalnya, pada sebuah aplikasi e-commerce, modul pembayaran dan pengiriman harus bertukar data agar transaksi berjalan dengan lancar.
+
+2. Konsistensi Data
+Semakin besar sebuah platform, maka semakin banyak celah untuk terjadinya inkonsistensi data. Perubahan yang dilakukan oleh pengguna/admin pada sebuah bagian platform harus tercerminkan juga di bagian lain platform. Misalnya, di dalam sebuah e-commerce, ketika sebuah toko mengubah jumlah stock barang menjadi 0 (habis), perubahan tersebut harus secara real-time tercerminkan di komponen platform user. Sehingga, user tidak bisa memesan barang yang sudah habis. Data delivery memastikan perubahan yang dilakukan di suatu bagian bisa tersinkronisasi ke seluruh platform.
+
+<h2>2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?</h2>
+Secara umum, menurut saya JSON lebih baik dibandingkan XML, berikut alasannya : 
+
+1. Format yang Ringkas
+JSON Memiliki format yang lebih ringkas, karena dibandingkan dengan XML yang menggunakan tag pembuka dan tag penutup, json hanya menggunakan tanda kurung dan tanda kutip. Hal ini membuat JSON lebih ringkas dibanding XML
+2. Kinerja yang lebih baik
+Dikarenakan format JSON yang lebih ringkas dibanding dengan XML, JSON jadi lebih cepat diproses oleh browser dan aplikasi backend dibandingkan XML.
+3. Kompatibel dengan JavaScript
+Javascript secara langsung mendukung JSON, hal ini menyebabkan JSON jadi opsi yang lebih populer. Karena Javascript memiliki JSON sebagai sintaks, JSON dapat diurai atau dihasilkan dengan mudah.
+
+<h2>3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?</h2>
+Method is_valid() berfungsi untuk memeriksa validitas data yang dikirim melalui form. Validitas data ini dilihat dari semua aturan validasi yang ditentukan sebelumnya. Ketentuan ini bisa berasal dari kesesuaian tipe data field, apakah field wajib sudah terisi, dan juga aturan - aturan khusus yang sebelumnya disiapkan oleh pengembang. 
+
+Tentu saja method ini sangat bermanfaat untuk memastikan kualitas data yang masuk ke database. Kita bisa mengembalikan kesalahan ke pengguna apabila ada kriteria input yang tidak dipenuhi. Hal ini dapat dicapai dengan mengirimkan pesan kesalahan ke pengguna. 
+
+<h2>Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?</h2>
+CSRF adalah singkatan dari (Cross-Site Request Forgery). CSRF adalah serangan yang mengeksploitasi kepercayaan yang dimiliki platform terhadap sebuah pengguna yang terautentikasi. Serangan ini umumnya memaksa pengguna secara diam - diam untuk mengirimkan HTPP request setelah mendapatkan cookies dari user. Sehingga, seolah - olah user lah yang melakukan HTTP request tersebut ketika pada kenyataannya, hal tersebut dilakukan oleh penyerang. Misalnya, kita sudah berhasil login ke sebuah situs, maka session cookie akan disimpan oleh browser. Misalnya kita menekan link dengan form tersembunyi, form tersebut bisa mendapatkan session cookie kita, walaupun di situs yang berbeda, dan akhirnya melakukan http requests yang tidak diinginkan, seperti mendelete account.
+
+Fungsi dari csrf_token adalah untuk memastikan kalau http request yang dilakukan oleh user yang terautentikasi memang berasal dari si user, dan bukan penyerang. Dengan menggenerate token random pada form yang selalu dikirim bersamaan dalam permintaan post, django dapat memverifikasi apakah permintaan post tersebut valid atau tidak. Hal ini memastikan permintaan yang didapatkan valid dan memang dibuat oleh user.
+
+<h2>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
+
+* Mengedit models.py.
+  1. Menambahkan ID Ke ProductEntry di models.py dengan id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  
+  2. Lakukan Migrasi pada model
+* Membuat input form untuk menambahkan objek model pada app sebelumnya
+  1. Buat forms.py dan buat class turunan ModelForm yang memiliki fields yang sesuai dengan ProductEntry
+  2. Buat fungsi create_product_entry di views.py. Fungsi tersebut akan menghandle request POST dari form. Nantinya data pada form akan disimpan. Fungsi ini juga dibuat untuk merender html form.
+* Tambahkan data form ke main.html
+  1. Tambahkan product entries dari models.py. Dapatkan semua object ProductEntry dan tambahkan ke context
+* Tambahkan link form (fungsi create_product_entry) ke urls.py
+* Buat template html entry form create product.
+  1. Form menggunakan method post
+  2. Tambahkan csrf_token
+  3. Tambahkan button submit untuk menambahkan product entry
+* Tampilkan data dan link form ke main.html
+  1. Cek apakah sudah ada data, kalau belum ada, jangan tampilkan apa apa, kalau sudah ada, tampilkan seluruh field pada data untuk tiap objek (nama, price, description, produk_terjual, rating).
+  2. Tambahkan link ke form penambahan entri produk
+* Tambahkan fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON
+  1. Buat fungsi show_xml untuk semua data. Gunakan serializers.serialize dengan format xml untuk mengubah jadi format xml
+  2. Buat fungsi show_json untuk semua data. Gunakan serializers.serialize dengan format json untuk mengubah jadi format json
+  3. Tambahkan path ke urls.py
+* Tambahkan fungsi views baru untuk melihat objek dalam formatXML by ID, dan JSON by ID.
+  1. Buat fungsi show_xml_by_id dengan parameter tambahan, yaitu id. Dapatkan data dengan method filter dan input id dari parameter. Gunakan serializers.serialize dengan format xml untuk mengubah jadi format xml
+  2. Buat fungsi show_json_by_id dengan parameter tambahan, yaitu id. Dapatkan data dengan method filter dan input id dari parameter. Gunakan serializers.serialize dengan format json untuk mengubah jadi format xml
+  3. Tambahkan path ke urls.py dengan path "xml/<str:id>/" atau "json/<str:id>/" untuk mendapatkan id dari link.
+
+
+
+
+
+
+
+
+
+
+<h1>TUGAS 2</h1>
 <h2> 1.Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
 
 * Membuat proyek Django baru

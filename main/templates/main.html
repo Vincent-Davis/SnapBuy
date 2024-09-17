@@ -1,15 +1,42 @@
-<h1>Nama Aplikasi : {{aplikasi}}</h1>
+{% extends 'base.html' %}
+ {% block content %}
+ <h1>Nama Aplikasi {{aplikasi}}</h1>
 
-<p>Nama : {{nama}}</p>
-<p>Kelas : {{kelas}}</p>
+ <p>Nama : {{nama}}</p>
+ <p>Kelas : {{kelas}}</p>
 
-<!-- <h5>Nama: </h5>
-<p>{{nama}}</p> 
-<h5>Price: </h5>
-<p>{{price}}</p> 
-<h5>Description: </h5>
-<p>{{description}}</p> 
-<h5>Produk Terjual: </h5>
-<p>{{produk_terjual}}</p> 
-<h5>Rating: </h5>
-<p>{{rating}}</p>  -->
+{% if not product_entries %}
+<p>Belum ada data produk pada mental health tracker.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Nama</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Produk Terjual</th>
+    <th>Rating</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data product di bawah baris ini 
+  {% endcomment %} 
+  {% for product_entry in product_entries %}
+  <tr>
+    <td>{{product_entry.nama}}</td>
+    <td>{{product_entry.price}}</td>
+    <td>{{product_entry.description}}</td>
+    <td>{{product_entry.produk_terjual}}</td>
+    <td>{{product_entry.rating}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product_entry' %}">
+  <button>Add New product Entry</button>
+</a>
+{% endblock content %}
+
+
+
