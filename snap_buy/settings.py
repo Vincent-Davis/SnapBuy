@@ -27,8 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://vincent-davis-snapbuy.pbp.cs.ui.ac.id/","http://vincent-davis-snapbuy.pbp.cs.ui.ac.id/"]
 
-
-# Application definition
+#tambah
+# Application definition 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
