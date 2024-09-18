@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gra7a^@u673xfytxp*d+y)2&!&^!yvt1@8s7g-bj3czxk(d5g3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://vincent-davis-snapbuy.pbp.cs.ui.ac.id/","http://vincent-davis-snapbuy.pbp.cs.ui.ac.id/"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "vincent-davis-snapbuy.pbp.cs.ui.ac.id"]
 
 #tambah
 # Application definition 
@@ -120,5 +120,7 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
+CSRF_TRUSTED_ORIGINS = ["http://localhost","https://vincent-davis-snapbuy.pbp.cs.ui.ac.id/", "http://vincent-davis-snapbuy.pbp.cs.ui.ac.id/"]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
