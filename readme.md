@@ -1,11 +1,13 @@
 <h1>TUGAS 4</h1>
  <h2>1. Apa perbedaan antara HttpResponseRedirect() dan redirect()</h2>
+  
   * HttpResponseRedirect
   Merupakan kelas bawaan Django yang membuat respon redirect ke url yang diberikan di parameter. Keunggulan menggunakan HttpResponseRedirect adalah kita dapat memanipulasi object response yang dibuat. Misalnya, dalam hal cookie, menggunakan HttpResponseRedirect bisa lebih menguntungkan, karena kita bisa menggunakan response.set_cookie atau response.delete_cookie untuk memanipulasi cookie. Hal ini tidak bisa dilakukan bila kita menggunakan redirect
   * Redirect
   Merupakan fungsi shortcut django yang sebenarnya juga menggunakan HttpResponseRedirect tapi lebih mudah ditunakan karena dapat menerima input URL, nama view, atau objek model. Fungsi ini bisa secara otomatis menangani konversi ke url yang tepat. Namun kekurangannya adalah objek response tidak bisa dimanipulasi
 
  <h2>2. Jelaskan cara kerja penghubungan model Product dengan User!</h2>
+  
   pada model product, user dihubungkan dengan menggunakan foreign key. Hal ini terlihat dari user = models.ForeignKey(User, on_delete=models.CASCADE). Parameter on_delete yang diset ke cascade memastikan agar datanya dihapus juga saat user dihapus. 
   
   User disimpan pada saat request post dilakukan. Terlihat dari kode ini : 
@@ -21,6 +23,7 @@
 
 
  <h2>3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.</h2>
+ 
   * Authentication
   Autentikasi adalah proses verifikasi identitas pengguna, di mana sistem memeriksa apakah pengguna yang mencoba masuk adalah pengguna yang sah dengan memvalidasi kredensial seperti username dan password. Proses ini memastikan bahwa hanya pengguna yang terdaftar dan memiliki izin yang tepat dapat mengakses sistem.
   * Authorization
@@ -49,6 +52,7 @@
   Jika cookies yang menyimpan session ID tidak dilindungi dengan benar (misalnya, tanpa enkripsi), penyerang dapat mencuri cookie tersebut melalui serangan man-in-the-middle atau melalui cross-site scripting (XSS).
  
  <h2>5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
+ 
   1. Membuat form registrasi
     * Import UsercreationForm di views.py
     * Tambahkan fungsi di views.py(register) yang menampilkan form. Kali ini, form merupakan instance dari UsercreationForm. 
@@ -84,7 +88,6 @@
           product_entry.user = request.user
     * Menampilkan nama username (diganti dari nama pembuat ke nama username) pada fungsi show_main dengan mengganti context dengan request.user.username
     * lakukan model migration
-
 
 
 <h1>TUGAS 3 </h1>
