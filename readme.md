@@ -11,10 +11,12 @@
   pada model product, user dihubungkan dengan menggunakan foreign key. Hal ini terlihat dari user = models.ForeignKey(User, on_delete=models.CASCADE). Parameter on_delete yang diset ke cascade memastikan agar datanya dihapus juga saat user dihapus. 
   
   User disimpan pada saat request post dilakukan. Terlihat dari kode ini : 
+
             if form.is_valid() and request.method == "POST":
               product_entry = form.save(commit=False)
               product_entry.user = request.user
               product_entry.save()
+              
   Terlihat kalau data user didapatkan bukan dari input form, melainkan melalui atribut user dari parameter request.
 
   Setelah itu, dilakukan juga filter data berdasarkan user. 
@@ -54,6 +56,7 @@
  <h2>5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
  
   1. Membuat form registrasi
+
     * Import UsercreationForm di views.py
     * Tambahkan fungsi di views.py(register) yang menampilkan form. Kali ini, form merupakan instance dari UsercreationForm. 
     * Buat penanganan request POST (request pembuatan akun) dengan menyimpan data dan me redirect ke main page.
@@ -61,6 +64,7 @@
     * Render template dengan context berisikan form tersebut.
     * Tambahkan fungsi register ke urls.py
   2. Membuat Fungsi Login
+
     * Buat fungsi baru di views.py (login_user) yang berfungsi untuk melakukan autentikasi kepada user yang login
     * Buatlah instance dari AuthenticationForm
     * Bila tidak ada request POST maka kembalikan render template dengan context berisikan authentication form tersebut
@@ -68,20 +72,24 @@
     * Buat template login yang menampilkan form dengan csrf token. Tambahkan juga link yang mengalihkan ke register page.
     * Tambahkan fungsi ke urls.py
   3. Membuat Fungsi Logout
+
     * Import fungsi logout dari django di views.py
     * Buat function (logout) yang memanggil method tersebut, lalu me re-direct ke login page.
     * Tambahkan link yang memanggil function ini di bagian bawah main.html
     * Tambahkan ke urls.py
   4. Merestriksi halaman lain bila belum login
+
     * Import login_required ke views.py
     * Tambahkan decorator login_required ke fungsi show_main
   5. Menggunakan data Cookie
+
     * Import datetime, HttpResponseRedirect, dan Reverse
     * Pada fungsi login_user tambahkan cookie last_login. Hal ini dilakukan dengan memanfaatkan HttpResponseRedirect dan fungsi set_cookie.
     * Tambahkan context last_login pada context show_main yang isinya merupakan request.COOKIES['last_login']
     * Menggunakan HttpResponseRedirectdan fungsi delete_cookie, hapus cookie di logout_user.
     * Tambahkan keterangan kapan terakhir login di main.html
   6. Menghubungkan ProductEntry degnan User
+
     * Tambahkan User ke product entry dengan menggunakan models.ForeinKey
     * Buka views.py dan pada function create_product_entry, simpan data user dengan mendapatkan data user menggunakan request.user
           product_entry = form.save(commit=False)
