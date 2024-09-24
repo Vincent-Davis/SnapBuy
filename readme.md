@@ -1,3 +1,92 @@
+<h1>TUGAS 4</h1>
+ <h2>1. Apa perbedaan antara HttpResponseRedirect() dan redirect()</h2>
+  * HttpResponseRedirect
+  Merupakan kelas bawaan Django yang membuat respon redirect ke url yang diberikan di parameter. Keunggulan menggunakan HttpResponseRedirect adalah kita dapat memanipulasi object response yang dibuat. Misalnya, dalam hal cookie, menggunakan HttpResponseRedirect bisa lebih menguntungkan, karena kita bisa menggunakan response.set_cookie atau response.delete_cookie untuk memanipulasi cookie. Hal ini tidak bisa dilakukan bila kita menggunakan redirect
+  * Redirect
+  Merupakan fungsi shortcut django yang sebenarnya juga menggunakan HttpResponseRedirect tapi lebih mudah ditunakan karena dapat menerima input URL, nama view, atau objek model. Fungsi ini bisa secara otomatis menangani konversi ke url yang tepat. Namun kekurangannya adalah objek response tidak bisa dimanipulasi
+
+ <h2>2. Jelaskan cara kerja penghubungan model Product dengan User!</h2>
+  pada model product, user dihubungkan dengan menggunakan foreign key. Hal ini terlihat dari user = models.ForeignKey(User, on_delete=models.CASCADE). Parameter on_delete yang diset ke cascade memastikan agar datanya dihapus juga saat user dihapus. 
+  
+  User disimpan pada saat request post dilakukan. Terlihat dari kode ini : 
+            if form.is_valid() and request.method == "POST":
+              product_entry = form.save(commit=False)
+              product_entry.user = request.user
+              product_entry.save()
+  Terlihat kalau data user didapatkan bukan dari input form, melainkan melalui atribut user dari parameter request.
+
+  Setelah itu, dilakukan juga filter data berdasarkan user. 
+  product_entries = ProductEntry.objects.filter(user=request.user)
+  Oleh karena itu, data forms yang nantinya terlihat seharusnya hanya mengandung data yang dibuat user.
+
+
+ <h2>3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.</h2>
+  * Authentication
+  Autentikasi adalah proses verifikasi identitas pengguna, di mana sistem memeriksa apakah pengguna yang mencoba masuk adalah pengguna yang sah dengan memvalidasi kredensial seperti username dan password. Proses ini memastikan bahwa hanya pengguna yang terdaftar dan memiliki izin yang tepat dapat mengakses sistem.
+  * Authorization
+  Authorisasi adalah proses yang menentukan hak atau izin pengguna yang telah diautentikasi untuk mengakses sumber daya atau melakukan tindakan tertentu dalam sistem. Setelah pengguna berhasil diautentikasi, otorisasi menentukan apa yang boleh dan tidak boleh dilakukan oleh pengguna tersebut, berdasarkan peran atau izin yang diberikan kepada mereka.
+
+  Saat pengguna login, umumnya proses autentikasi dilakukan dengan memeriksa apakah username dan passowrdnya sesuai. Bila user terautentikasi, maka django akan mengirim cookie session ke browser pengguna. Cookie ini memungkinkan server untuk mengenali user pada request request berikutnya. Proses autenthication berada pada bagian - bagian platform yang tidak dapat diakses apabila pengguna belum login. Hal ini dilakukan dengan menggunakan decorator @login_required(login_url='/login').
+
+ <h2>4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?</h2>
+
+ Django mengingat pengguna yang telah login dengan menggunakan cookies yang disimpan di browser pengguna. Ketika pengguna berhasil login, Django membuat sesi khusus untuk mereka dan menyimpan session ID di cookie. Setiap kali pengguna mengirimkan permintaan HTTP (misalnya, membuka halaman lain di situs), browser mengirimkan cookie ini bersama dengan permintaan tersebut, sehingga server Django dapat mencocokkan session ID dari cookie dengan sesi pengguna yang tersimpan di server.
+ 
+ Selain itu, beberapa kegunaan cookie adalah :
+  1. Menyimpan Otentikasi
+  Dengan cookies, situs dapat mempertahankan sesi login pengguna bahkan setelah mereka menutup browser 
+  2. Analitik dan Pelacakan
+  Cookies sering digunakan oleh layanan analitik untuk melacak perilaku pengguna di situs web
+  3. Pengiklanan dan preferensi
+  Cookies dapat menyimpan pengaturan preferensi pengguna seperti bahasa, tema, atau item dalam keranjang belanja, sehingga pengalaman pengguna dapat dipersonalisasi. Cookies juga digunakan oleh platform iklan untuk melacak kebiasaan browsing pengguna, sehingga dapat menampilkan iklan yang relevan dengan minat pengguna.
+
+  Namun, tidak semua cookies aman digunakan : 
+  1. Situs tanpa HTTPS
+  Cookies yang dikirim melalui koneksi HTTP yang tidak terenkripsi dapat diambil oleh pihak ketiga yang mengintercept data.
+  2. Cross-Site Request Forgery (CSRF)
+  Penyerang dapat mengirim permintaan berbahaya yang tampak sah dengan memanfaatkan cookies sesi pengguna yang sudah login. 
+  3. Session Hijacking
+  Jika cookies yang menyimpan session ID tidak dilindungi dengan benar (misalnya, tanpa enkripsi), penyerang dapat mencuri cookie tersebut melalui serangan man-in-the-middle atau melalui cross-site scripting (XSS).
+ 
+ <h2>5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).</h2>
+  1. Membuat form registrasi
+    * Import UsercreationForm di views.py
+    * Tambahkan fungsi di views.py(register) yang menampilkan form. Kali ini, form merupakan instance dari UsercreationForm. 
+    * Buat penanganan request POST (request pembuatan akun) dengan menyimpan data dan me redirect ke main page.
+    * Buat template untuk form registrasi yang berisikan form dengan csrf token.
+    * Render template dengan context berisikan form tersebut.
+    * Tambahkan fungsi register ke urls.py
+  2. Membuat Fungsi Login
+    * Buat fungsi baru di views.py (login_user) yang berfungsi untuk melakukan autentikasi kepada user yang login
+    * Buatlah instance dari AuthenticationForm
+    * Bila tidak ada request POST maka kembalikan render template dengan context berisikan authentication form tersebut
+    * Bila ada request POST, maka ambil data dan dapatkan user. Bila berhasil di autentikasi, maka panggil method login (bawaan django) dan redirect ke main page.
+    * Buat template login yang menampilkan form dengan csrf token. Tambahkan juga link yang mengalihkan ke register page.
+    * Tambahkan fungsi ke urls.py
+  3. Membuat Fungsi Logout
+    * Import fungsi logout dari django di views.py
+    * Buat function (logout) yang memanggil method tersebut, lalu me re-direct ke login page.
+    * Tambahkan link yang memanggil function ini di bagian bawah main.html
+    * Tambahkan ke urls.py
+  4. Merestriksi halaman lain bila belum login
+    * Import login_required ke views.py
+    * Tambahkan decorator login_required ke fungsi show_main
+  5. Menggunakan data Cookie
+    * Import datetime, HttpResponseRedirect, dan Reverse
+    * Pada fungsi login_user tambahkan cookie last_login. Hal ini dilakukan dengan memanfaatkan HttpResponseRedirect dan fungsi set_cookie.
+    * Tambahkan context last_login pada context show_main yang isinya merupakan request.COOKIES['last_login']
+    * Menggunakan HttpResponseRedirectdan fungsi delete_cookie, hapus cookie di logout_user.
+    * Tambahkan keterangan kapan terakhir login di main.html
+  6. Menghubungkan ProductEntry degnan User
+    * Tambahkan User ke product entry dengan menggunakan models.ForeinKey
+    * Buka views.py dan pada function create_product_entry, simpan data user dengan mendapatkan data user menggunakan request.user
+          product_entry = form.save(commit=False)
+          product_entry.user = request.user
+    * Menampilkan nama username (diganti dari nama pembuat ke nama username) pada fungsi show_main dengan mengganti context dengan request.user.username
+    * lakukan model migration
+
+
+
 <h1>TUGAS 3 </h1>
 <h2>1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?</h2>
 1. Komunikasi antar komponen 
