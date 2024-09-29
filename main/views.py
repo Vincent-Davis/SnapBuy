@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 def show_main(request):
     product_entries = ProductEntry.objects.filter(user=request.user)
+    for product in product_entries:
+        product.rating_percentage = product.rating * 20
     context = {
         'nama': request.user.username,
         'kelas': 'F',
