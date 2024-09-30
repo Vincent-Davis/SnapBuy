@@ -18,6 +18,7 @@ def show_main(request):
     context = {
         'nama': request.user.username,
         'kelas': 'F',
+        'npm' :2306275014,
         'aplikasi' : 'SnapBuy',
         'product_entries': product_entries,
         'last_login': request.COOKIES['last_login']
@@ -108,3 +109,5 @@ def delete_product(request, id):
     product.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+#add
