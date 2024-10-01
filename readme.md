@@ -12,12 +12,15 @@
   * User-Agent: Browser memiliki gaya default yang diterapkan pada elemen HTML. Setiap browser mungkin memiliki gaya default yang berbeda.
 
   Importance : Deklarasi CSS dapat diprioritaskan dengan menggunakan !important.
+    
     contoh : 
           h1 {
       color: blue !important;
     }
   Aturan ini akan mengesampingkan semua aturan lain yang mengatur warna teks elemen h1.
+  
   2. Selector Specificity
+    
     1. Inline styles: Gaya yang ditulis langsung di elemen HTML.
 
       Contoh: <h1 style="color: red;"> akan mengesampingkan semua gaya lain yang ditulis di file CSS.
