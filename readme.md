@@ -5,17 +5,18 @@
   Ini adalah Jawaban yang terurut dari paling penting :
     
   1. Origin & Importance 
-    Origin : 
-    * Author: CSS yang dibuat oleh pengembang front-end, yaitu stylesheet yang ditulis dalam proyek atau aplikasi.
-    * User: Pengguna browser dapat mengatur gaya secara manual di pengaturan browser mereka, seperti mengatur font dan warna.
-    * User-Agent: Browser memiliki gaya default yang diterapkan pada elemen HTML. Setiap browser mungkin memiliki gaya default yang berbeda.
+    
+  Origin : 
+  * Author: CSS yang dibuat oleh pengembang front-end, yaitu stylesheet yang ditulis dalam proyek atau aplikasi.
+  * User: Pengguna browser dapat mengatur gaya secara manual di pengaturan browser mereka, seperti mengatur font dan warna.
+  * User-Agent: Browser memiliki gaya default yang diterapkan pada elemen HTML. Setiap browser mungkin memiliki gaya default yang berbeda.
 
-    Importance : Deklarasi CSS dapat diprioritaskan dengan menggunakan !important.
-      contoh : 
-            h1 {
-        color: blue !important;
-      }
-    Aturan ini akan mengesampingkan semua aturan lain yang mengatur warna teks elemen h1.
+  Importance : Deklarasi CSS dapat diprioritaskan dengan menggunakan !important.
+    contoh : 
+          h1 {
+      color: blue !important;
+    }
+  Aturan ini akan mengesampingkan semua aturan lain yang mengatur warna teks elemen h1.
   2. Selector Specificity
     1. Inline styles: Gaya yang ditulis langsung di elemen HTML.
 
