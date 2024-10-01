@@ -5,7 +5,6 @@
   Ini adalah Jawaban yang terurut dari paling penting :
     
   1. Origin & Importance 
-    
     Origin : 
     * Author: CSS yang dibuat oleh pengembang front-end, yaitu stylesheet yang ditulis dalam proyek atau aplikasi.
     * User: Pengguna browser dapat mengatur gaya secara manual di pengaturan browser mereka, seperti mengatur font dan warna.
@@ -40,7 +39,7 @@
     Inherited Properties: Gaya CSS dari elemen parent akan diturunkan ke elemen anak, kecuali jika elemen anak memiliki gaya khusus yang diterapkan padanya.
 
 
-  <h2>Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!</h2>
+  <h2>Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!</h2>
 
     1. Penggunaan Perangkat yang Beragam
       * Pengguna saat ini mengakses aplikasi web dari berbagai perangkat, termasuk desktop, laptop, tablet, dan smartphone. Setiap perangkat memiliki ukuran layar yang berbeda, sehingga aplikasi web harus dapat menyesuaikan tampilannya agar tetap mudah digunakan dan terlihat baik di semua perangkat.
