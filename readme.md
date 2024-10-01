@@ -20,50 +20,67 @@
   Aturan ini akan mengesampingkan semua aturan lain yang mengatur warna teks elemen h1.
   
   2. Selector Specificity
-    
-    1. Inline styles: Gaya yang ditulis langsung di elemen HTML.
 
+     1. Inline styles: Gaya yang ditulis langsung di elemen HTML.
+  
       Contoh: h1 style="color: red;" akan mengesampingkan semua gaya lain yang ditulis di file CSS.
-    2. ID selectors: Selector yang menggunakan ID.
-
+     
+     2. ID selectors: Selector yang menggunakan ID.
+  
       Contoh: #title1 { color: aqua; } akan memiliki prioritas lebih tinggi daripada class atau tag selector.
-    3. Class selectors: Selector yang menggunakan class.
-
+     
+     3. Class selectors: Selector yang menggunakan class.
+  
       Contoh: .class1 { color: cadetblue; }.
-    4. Element selectors: Selector berdasarkan tag HTML.
+     
+     4. Element selectors: Selector berdasarkan tag HTML.
 
       Contoh: h1 { color: blue; } akan mengatur semua elemen h1.
+    
   3. Source Order
 
-    Ketika ada beberapa file CSS atau aturan CSS dalam satu file HTML, aturan yang muncul paling akhir akan mengesampingkan aturan yang sebelumnya, jika kedua aturan memiliki spesifisitas yang sama.
-  4. Initial & Inherited Properties
+Ketika ada beberapa file CSS atau aturan CSS dalam satu file HTML, aturan yang muncul paling akhir akan mengesampingkan aturan yang sebelumnya, jika kedua aturan memiliki spesifisitas yang sama.
+  5. Initial & Inherited Properties
 
-    Initial Properties: Setiap elemen HTML memiliki nilai default untuk properti tertentu jika tidak ada gaya yang diterapkan. Nilai awal ini bergantung pada properti yang digunakan.
+Initial Properties: Setiap elemen HTML memiliki nilai default untuk properti tertentu jika tidak ada gaya yang diterapkan. Nilai awal ini bergantung pada properti yang digunakan.
 
-    Inherited Properties: Gaya CSS dari elemen parent akan diturunkan ke elemen anak, kecuali jika elemen anak memiliki gaya khusus yang diterapkan padanya.
-
+Inherited Properties: Gaya CSS dari elemen parent akan diturunkan ke elemen anak, kecuali jika elemen anak memiliki gaya khusus yang diterapkan padanya.
 
   <h2>Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!</h2>
 
-    1. Penggunaan Perangkat yang Beragam
-      * Pengguna saat ini mengakses aplikasi web dari berbagai perangkat, termasuk desktop, laptop, tablet, dan smartphone. Setiap perangkat memiliki ukuran layar yang berbeda, sehingga aplikasi web harus dapat menyesuaikan tampilannya agar tetap mudah digunakan dan terlihat baik di semua perangkat.
-      * Responsive design memungkinkan aplikasi web untuk menyesuaikan tata letak, ukuran teks, gambar, dan elemen interaktif sesuai dengan ukuran layar perangkat. Hal ini penting untuk memberikan pengalaman pengguna (user experience) yang konsisten dan menyenangkan, baik di layar besar maupun kecil.
-    2. Efisiensi Pengembangan
-      * Dengan menerapkan responsive design, pengembang hanya perlu mengembangkan satu situs web yang dapat bekerja di berbagai perangkat. Hal ini mengurangi biaya dan waktu yang diperlukan untuk membuat versi terpisah untuk desktop dan mobile.
+  1. Penggunaan Perangkat yang Beragam
+     
+     * Pengguna saat ini mengakses aplikasi web dari berbagai perangkat, termasuk desktop, laptop, tablet, dan smartphone. Setiap perangkat memiliki ukuran layar yang berbeda, sehingga aplikasi web harus dapat menyesuaikan tampilannya agar tetap mudah digunakan dan terlihat baik di semua perangkat.
+    
+     * Responsive design memungkinkan aplikasi web untuk menyesuaikan tata letak, ukuran teks, gambar, dan elemen interaktif sesuai dengan ukuran layar perangkat. Hal ini penting untuk memberikan pengalaman pengguna (user experience) yang konsisten dan menyenangkan, baik di layar besar maupun kecil.
+  
+  3. Efisiensi Pengembangan
 
-    Yang sudah menerapkan : 
-      * Twitter
-      Twitter menggunakan responsive design yang sangat baik. Saat diakses dari perangkat mobile, tata letaknya berubah menjadi vertikal dengan navigasi yang lebih mudah dijangkau, dan gambar serta video menyesuaikan ukuran layar tanpa kehilangan kualitas. Menu navigasi berubah menjadi ikon-ikon yang lebih ringkas, dan kolom teks memiliki ukuran yang optimal untuk dibaca tanpa perlu memperbesar layar.
-    Yang belum menerapkan : 
-      * Siasisten
-      Web Siasisten cs ui masih harus melakukan scroll horizontal di handphone. Teks masih terlalu kecil bila dibaca dari handphone. Tidak hanya itu, tombol tombol yang ada juga terlalu kecil, sehingga user harus melakukan zoom dan scrolling horizontal secara berlebihan
+     * Dengan menerapkan responsive design, pengembang hanya perlu mengembangkan satu situs web yang dapat bekerja di berbagai perangkat. Hal ini mengurangi biaya dan waktu yang diperlukan untuk membuat versi terpisah untuk desktop dan mobile.
 
+  Yang sudah menerapkan : 
+     
+  * Twitter
+      
+Twitter menggunakan responsive design yang sangat baik. Saat diakses dari perangkat mobile, tata letaknya berubah menjadi vertikal dengan navigasi yang lebih mudah dijangkau, dan gambar serta video menyesuaikan ukuran layar tanpa kehilangan kualitas. Menu navigasi berubah menjadi ikon-ikon yang lebih ringkas, dan kolom teks memiliki ukuran yang optimal untuk dibaca tanpa perlu memperbesar layar.
+  
+  Yang belum menerapkan : 
+      
+  * Siasisten
+
+Web Siasisten cs ui masih harus melakukan scroll horizontal di handphone. Teks masih terlalu kecil bila dibaca dari handphone. Tidak hanya itu, tombol tombol yang ada juga terlalu kecil, sehingga user harus melakukan zoom dan scrolling horizontal secara berlebihan
 
   <h2>Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!</h2>
-    1. Margin 
-    Margin adalah ruang kosong di luar elemen, yang memisahkan elemen tersebut dari elemen lainnya di sekitarnya. Margin tidak memiliki warna atau isi, hanya berfungsi sebagai jarak antar elemen di halaman web.
-    2. Border adalah garis yang mengelilingi elemen, yang berada di antara margin dan padding. Border memberikan batas visual yang jelas untuk elemen dan bisa diberi warna, ketebalan, dan gaya yang berbeda (misalnya solid, dashed, dotted).
-    3. Padding adalah ruang kosong di dalam elemen, yang memisahkan konten elemen dari border elemen tersebut. Padding menambah ruang di dalam elemen dan sering digunakan untuk memberikan jarak antara teks atau gambar dengan batas elemen.
+  1. Margin 
+    
+Margin adalah ruang kosong di luar elemen, yang memisahkan elemen tersebut dari elemen lainnya di sekitarnya. Margin tidak memiliki warna atau isi, hanya berfungsi sebagai jarak antar elemen di halaman web.
+
+  2. Border 
+    
+Border adalah garis yang mengelilingi elemen, yang berada di antara margin dan padding. Border memberikan batas visual yang jelas untuk elemen dan bisa diberi warna, ketebalan, dan gaya yang berbeda (misalnya solid, dashed, dotted).
+  3.Padding 
+
+Padding adalah ruang kosong di dalam elemen, yang memisahkan konten elemen dari border elemen tersebut. Padding menambah ruang di dalam elemen dan sering digunakan untuk memberikan jarak antara teks atau gambar dengan batas elemen.
 
     Untuk lebih jelasnya, kita dapat mengacu pada sketsa ini : 
 
@@ -83,20 +100,20 @@
   <h2>Jelaskan konsep flex box dan grid layout beserta kegunaannya!</h2>
     1. Flexbox
   
-      Flexbox adalah sistem layout satu dimensi yang dirancang untuk mengelola tata letak di satu baris (horizontal) atau satu kolom (vertikal). Flexbox digunakan untuk mengontrol tata letak elemen secara fleksibel dalam satu arah (row atau column).
-      Flexbox memudahkan pengaturan elemen-elemen secara responsif, seperti mendistribusikan ruang antara item, mengatur alignment, dan memperbesar atau memperkecil item sesuai dengan ruang yang tersedia.
+  Flexbox adalah sistem layout satu dimensi yang dirancang untuk mengelola tata letak di satu baris (horizontal) atau satu kolom (vertikal). Flexbox digunakan untuk mengontrol tata letak elemen secara fleksibel dalam satu arah (row atau column).
+  Flexbox memudahkan pengaturan elemen-elemen secara responsif, seperti mendistribusikan ruang antara item, mengatur alignment, dan memperbesar atau memperkecil item sesuai dengan ruang yang tersedia.
     
-      Properti Utama Flexbox:
-        * display: flex: Menjadikan kontainer sebagai flex container, sehingga anak-anaknya menjadi flex items yang diatur oleh sistem flexbox.
-        * flex-direction: Menentukan arah layout dari item (baris atau kolom).
-        Contoh: flex-direction: row; (baris) atau flex-direction: column; (kolom).
-        * justify-content: Mengatur bagaimana item-item didistribusikan di sepanjang sumbu utama (main axis).
-        Contoh: justify-content: space-between; (mendistribusikan item dengan jarak yang sama).
-        * align-items: Mengatur alignment item di sepanjang sumbu sekunder (cross axis).
-        Contoh: align-items: center; (menempatkan item-item di tengah secara vertikal).
-        * flex-wrap: Memungkinkan elemen untuk membungkus ke baris berikutnya ketika ruang habis (berfungsi untuk layout responsif).
+  Properti Utama Flexbox:
+    * display: flex: Menjadikan kontainer sebagai flex container, sehingga anak-anaknya menjadi flex items yang diatur oleh sistem flexbox.
+    * flex-direction: Menentukan arah layout dari item (baris atau kolom).
+    Contoh: flex-direction: row; (baris) atau flex-direction: column; (kolom).
+    * justify-content: Mengatur bagaimana item-item didistribusikan di sepanjang sumbu utama (main axis).
+    Contoh: justify-content: space-between; (mendistribusikan item dengan jarak yang sama).
+    * align-items: Mengatur alignment item di sepanjang sumbu sekunder (cross axis).
+    Contoh: align-items: center; (menempatkan item-item di tengah secara vertikal).
+    * flex-wrap: Memungkinkan elemen untuk membungkus ke baris berikutnya ketika ruang habis (berfungsi untuk layout responsif).
 
-    2. Grid Layout
+  2. Grid Layout
 
       Grid Layout adalah sistem layout dua dimensi yang digunakan untuk mengatur elemen-elemen pada baris (row) dan kolom (column). Grid memungkinkan kamu untuk membuat tata letak yang lebih kompleks dibandingkan Flexbox, karena ia dapat mengatur elemen secara dua dimensi (baik dalam baris maupun kolom secara bersamaan).
 
@@ -110,32 +127,38 @@
         Contoh: grid-column: span 2; (membentang ke dua kolom).
 
 
-
   <h2>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!</h2>
   
   1. Menambahkan tailwind
-    * Menambahkan tag meta name = viewport agar dapat menyesuaikan dengan perilaku perangkat mobile
-    * Tambahkan script CDN tailwind di bagian head base.html
+
+      * Menambahkan tag meta name = viewport agar dapat menyesuaikan dengan perilaku perangkat mobile
+      * Tambahkan script CDN tailwind di bagian head base.html
+    
   2. Menambahkan Fitur Edit Product
-    * Buat fungsi edit_product di views.py yang mempunyai form yang sudah di pre-fill dengan menggunakan line form = ProductEntryForm(request.POST or None, instance=product), dengan product adalah product yg difilter berdasarkan id nya.
-    * Buat template edit_product.html yang berisi form
-    * Tambahkan ke urls.py
-    * Tambahkan button edit product di main.html
+     
+      * Buat fungsi edit_product di views.py yang mempunyai form yang sudah di pre-fill dengan menggunakan line form = ProductEntryForm(request.POST or None, instance=product), dengan product adalah product yg difilter berdasarkan id nya.
+      * Buat template edit_product.html yang berisi form
+      * Tambahkan ke urls.py
+      * Tambahkan button edit product di main.html
   3. Menambahkan fitur Hapus Product
-    * Buat fungsi delete_product di views.py yang menghapus product dengan product.delete() dan redirect ke halaman main
-    * Tambahkan ke urls.py
-    * Tambahkan button delete product di main.html
+     
+      * Buat fungsi delete_product di views.py yang menghapus product dengan product.delete() dan redirect ke halaman main
+      * Tambahkan ke urls.py
+      * Tambahkan button delete product di main.html
   4. Menambahkan Navigation Bar
-    * Membuat file template navigation bar 
-    * Pada file template tersebut, tambahkan menu - menu untuk navbar yaitu "Home", "Products", "Categories", dan "Cart".
-    * Bila pengguna sudah login, tambahkan tombol logout
-    * Membuat 2 design, yaitu design untuk desktop dan mobile
-    * Tambahkan navbar ke semua halaman web (kecuali login)
-  5. Mengkustomisasi halaman login, register, tambah product, dan halaman lainnya
-    * Menggunakan template dari tailwind untuk membuat website yang baik
-    * Membuat card baru dengan desain yang beda
-    * Menambahkan atribut produk yang sesuai ke card pada main.html
-    * Menambah button untuk edit dan menghapus card
+       
+      * Membuat file template navigation bar 
+      * Pada file template tersebut, tambahkan menu - menu untuk navbar yaitu "Home", "Products", "Categories", dan "Cart".
+      * Bila pengguna sudah login, tambahkan tombol logout
+      * Membuat 2 design, yaitu design untuk desktop dan mobile
+      * Tambahkan navbar ke semua halaman web (kecuali login)
+      
+  6. Mengkustomisasi halaman login, register, tambah product, dan halaman lainnya
+     
+      * Menggunakan template dari tailwind untuk membuat website yang baik
+      * Membuat card baru dengan desain yang beda
+      * Menambahkan atribut produk yang sesuai ke card pada main.html
+      * Menambah button untuk edit dan menghapus card
 
   
 <h1>TUGAS 4</h1>
