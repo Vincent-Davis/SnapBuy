@@ -104,27 +104,29 @@ Padding adalah ruang kosong di dalam elemen, yang memisahkan konten elemen dari 
   Flexbox memudahkan pengaturan elemen-elemen secara responsif, seperti mendistribusikan ruang antara item, mengatur alignment, dan memperbesar atau memperkecil item sesuai dengan ruang yang tersedia.
     
   Properti Utama Flexbox:
-    * display: flex: Menjadikan kontainer sebagai flex container, sehingga anak-anaknya menjadi flex items yang diatur oleh sistem flexbox.
-    * flex-direction: Menentukan arah layout dari item (baris atau kolom).
-    Contoh: flex-direction: row; (baris) atau flex-direction: column; (kolom).
-    * justify-content: Mengatur bagaimana item-item didistribusikan di sepanjang sumbu utama (main axis).
-    Contoh: justify-content: space-between; (mendistribusikan item dengan jarak yang sama).
-    * align-items: Mengatur alignment item di sepanjang sumbu sekunder (cross axis).
-    Contoh: align-items: center; (menempatkan item-item di tengah secara vertikal).
-    * flex-wrap: Memungkinkan elemen untuk membungkus ke baris berikutnya ketika ruang habis (berfungsi untuk layout responsif).
+  
+  * display: flex: Menjadikan kontainer sebagai flex container, sehingga anak-anaknya menjadi flex items yang diatur oleh sistem flexbox.
+  * flex-direction: Menentukan arah layout dari item (baris atau kolom).
+  Contoh: flex-direction: row; (baris) atau flex-direction: column; (kolom).
+  * justify-content: Mengatur bagaimana item-item didistribusikan di sepanjang sumbu utama (main axis).
+  Contoh: justify-content: space-between; (mendistribusikan item dengan jarak yang sama).
+  * align-items: Mengatur alignment item di sepanjang sumbu sekunder (cross axis).
+  Contoh: align-items: center; (menempatkan item-item di tengah secara vertikal).
+  * flex-wrap: Memungkinkan elemen untuk membungkus ke baris berikutnya ketika ruang habis (berfungsi untuk layout responsif).
 
   2. Grid Layout
 
       Grid Layout adalah sistem layout dua dimensi yang digunakan untuk mengatur elemen-elemen pada baris (row) dan kolom (column). Grid memungkinkan kamu untuk membuat tata letak yang lebih kompleks dibandingkan Flexbox, karena ia dapat mengatur elemen secara dua dimensi (baik dalam baris maupun kolom secara bersamaan).
 
       Properti Utama Grid Layout:
-        * display: grid: Menjadikan kontainer sebagai grid container.
-        * grid-template-columns dan grid-template-rows: Mengatur jumlah dan ukuran kolom serta baris.
-        Contoh: grid-template-columns: 1fr 2fr; (kolom pertama menggunakan 1 bagian, kolom kedua 2 bagian).
-        * grid-gap atau gap: Menentukan jarak antara baris dan kolom.
-        Contoh: gap: 20px; (jarak antar elemen dalam grid).
-        * grid-column dan grid-row: Menentukan seberapa banyak elemen membentang ke kolom atau baris.
-        Contoh: grid-column: span 2; (membentang ke dua kolom).
+     
+      * display: grid: Menjadikan kontainer sebagai grid container.
+      * grid-template-columns dan grid-template-rows: Mengatur jumlah dan ukuran kolom serta baris.
+      Contoh: grid-template-columns: 1fr 2fr; (kolom pertama menggunakan 1 bagian, kolom kedua 2 bagian).
+      * grid-gap atau gap: Menentukan jarak antara baris dan kolom.
+      Contoh: gap: 20px; (jarak antar elemen dalam grid).
+      * grid-column dan grid-row: Menentukan seberapa banyak elemen membentang ke kolom atau baris.
+      Contoh: grid-column: span 2; (membentang ke dua kolom).
 
 
   <h2>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!</h2>
