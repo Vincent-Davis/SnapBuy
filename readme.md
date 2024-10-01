@@ -22,7 +22,7 @@
   2. Selector Specificity
     1. Inline styles: Gaya yang ditulis langsung di elemen HTML.
 
-      Contoh: <h1 style="color: red;"> akan mengesampingkan semua gaya lain yang ditulis di file CSS.
+      Contoh: h1 style="color: red;" akan mengesampingkan semua gaya lain yang ditulis di file CSS.
     2. ID selectors: Selector yang menggunakan ID.
 
       Contoh: #title1 { color: aqua; } akan memiliki prioritas lebih tinggi daripada class atau tag selector.
