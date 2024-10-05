@@ -9,22 +9,23 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 @login_required(login_url='/login')
 def show_main(request):
-    product_entries = ProductEntry.objects.filter(user=request.user)
-    for product in product_entries:
-        product.rating_percentage = product.rating * 20
+    # for product in product_entries:
+    #     product.rating_percentage = product.rating * 20
     context = {
         'nama': request.user.username,
         'kelas': 'F',
         'npm' :2306275014,
         'aplikasi' : 'SnapBuy',
-        'product_entries': product_entries,
         'last_login': request.COOKIES['last_login']
     }
 
     return render(request, "main.html", context)
+
 
 def create_product_entry(request):
     form = ProductEntryForm(request.POST or None)
@@ -39,11 +40,11 @@ def create_product_entry(request):
     return render(request, "create_product_entry.html", context)
 
 def show_xml(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = ProductEntry.objects.all()
+    data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -71,11 +72,13 @@ def login_user(request):
       form = AuthenticationForm(data=request.POST)
 
       if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            response = HttpResponseRedirect(reverse("main:show_main"))
-            response.set_cookie('last_login', str(datetime.datetime.now()))
-            return response
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+      else:
+        messages.error(request, "Invalid username or password. Please try again.")
    else:
       form = AuthenticationForm(request)
    context = {'form': form}
@@ -110,4 +113,26 @@ def delete_product(request, id):
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
 
-#add
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    # Mengambil data dari POST request
+    nama = request.POST.get("nama")
+    price = request.POST.get("price")
+    description = request.POST.get("description")
+    produk_terjual = request.POST.get("produk_terjual")
+    rating = request.POST.get("rating")
+    user = request.user
+
+    # Membuat entri produk baru
+    new_product = ProductEntry(
+        nama=nama,
+        price=price,
+        description=description,
+        produk_terjual=produk_terjual,
+        rating=rating,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
