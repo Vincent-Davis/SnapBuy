@@ -13,9 +13,51 @@ Jika await tidak digunakan, getProductEntries() akan mengembalikan Promise yang 
 
 <h2>Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?</h2>
 
+Kita perlu menggunakan decorator @csrf_exempt pada view yang akan digunakan untuk AJAX POST request jika kita ingin menonaktifkan perlindungan CSRF (Cross-Site Request Forgery) untuk view tersebut. Secara default, Django menerapkan mekanisme perlindungan CSRF untuk semua permintaan POST yang berasal dari halaman web, yang memastikan bahwa setiap permintaan POST diautentikasi dan dikirim dari sumber yang sah.
+
+Namun, pada kasus AJAX POST request, terutama jika request tidak menyertakan CSRF token yang tepat (yang biasanya dihasilkan dan disisipkan oleh Django dalam formulir HTML), maka request tersebut akan dianggap berbahaya dan diblokir. Dengan menambahkan @csrf_exempt, kita menonaktifkan pemeriksaan CSRF hanya untuk view add_product_entry_ajax, sehingga AJAX POST request dapat diproses tanpa kendala.
+
 <h2>Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?</h2>
+
+1. Keamanan
+
+Pembersihan data di backend sangat penting terutama dari sisi keamanan. Meskipun validasi di frontend dapat membantu memberikan umpan balik cepat kepada pengguna, itu tidak bisa diandalkan sepenuhnya karena mudah dilewati. Pengguna atau penyerang yang mematikan JavaScript atau memanipulasi form HTML di browser bisa mengirim data yang tidak valid atau bahkan berbahaya langsung ke server. Ini bisa membuka celah bagi serangan seperti SQL injection, Cross-Site Scripting (XSS), dan eksploitasi lainnya yang memanfaatkan input tidak aman. Backend, yang mengontrol seluruh komunikasi dan data yang masuk ke server, harus memastikan bahwa semua input sudah dibersihkan dengan benar untuk mencegah serangan semacam ini, menjaga keamanan aplikasi dan data yang disimpannya.
+
+2. Konsistensi
+
+Selain itu, pembersihan di backend memastikan konsistensi dalam penanganan data. Aplikasi web bisa menerima data dari berbagai sumber selain browser, seperti aplikasi mobile, API, atau integrasi dengan layanan lain. Jika validasi dan pembersihan hanya dilakukan di frontend, kita tidak bisa menjamin bahwa semua sumber tersebut akan mengimplementasikan logika validasi yang sama. Dengan melakukan pembersihan di backend, kita dapat memastikan bahwa semua data yang masuk diperlakukan dengan standar yang sama terlepas dari sumbernya, sehingga aplikasi lebih andal dan mudah dipelihara. Logika validasi dan pembersihan terpusat di backend juga mencegah duplikasi dan inkonsistensi, menjaga efisiensi dalam pengelolaan data aplikasi.
+
 <h2>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!</h2>
 
+1. AJAX GET
+  * Ubahlah kode cards data product agar dapat mendukung AJAX GET.
+      * Menghapus fungsi mendapatkan entri product dari show_main pada views.py
+      * Ganti fungsi show_json dan show_xml dengan menambahkan ProductEntry.objects.filter(user=request.user), sehingga data difilter sesuai user yang sesuai (tidak bisa melihat data user lain)   
+  * Lakukan pengambilan data mood menggunakan AJAX GET. Pastikan bahwa data yang diambil hanyalah data milik pengguna yang logged-in.
+      * Membuat fungsi javascript untuk mendapatkan entri produk dengan menggunakan fungsi views json yang sudah dibuat sebelumnya return fetch("{% url 'main:show_json' %}").then((res) => res.json())
+      * Membuat fungsi javascript untuk merefresh entri mood.
+        * Bila data kosong, maka yang ditampilkan adalah gambar sedih menunjukan kalau belum ada data
+        * Bila data sudah ada, maka tampilkan data menggunakan desain kartu pada tugas sebelumnya. Gunakan productEntries.forEach((item) => { html+=' ... untuk melakukan for loop di tiap entri mood.
+      * Panggil fungsi untuk merefresh entri produk agar ditampilkan saat user masuk ke web
+    
+2. AJAX POST
+  * Buatlah sebuah tombol yang membuka sebuah modal dengan form untuk menambahkan mood.
+      * Menambah tombol dengan menggunakan tag button dengan atribut onclick yang akan memanggil fungsi showModal (fungsi untuk menampilkan form)
+  * Buatlah fungsi view baru untuk menambahkan mood baru ke dalam basis data.
+      * Tambahkan kode form untuk form ajax di bawah div dengan id product_entry_cards
+      * Form disembunyikan
+      * Buat fungsi showModal yang menampilkan form ajax, dengan membuang classlist yang hidden
+      * Buat fungsi hideModal yang menyembunyikan form ajax dengan menambahkan classlist yang hiden
+  * Buatlah path /create-ajax/ yang mengarah ke fungsi view yang baru kamu buat.
+      * Menambahkan fungsi add_product_entry_ajax pada views.py. Fungsi tersebut membuat instance ProductEntry yang baru dan menyimpannya
+      * Tambahkan dekorator csrf_exempt yang membuat Django tidak perlu mengecek keberadaan csrf_token pada POST request yang dikirimkan ke fungsi ini.
+      * Tambahkan juga dekorator require_POST membuat fungsi tersebut hanya bisa diakses ketika pengguna mengirimkan POST
+      * Tambahkan ke urls.py
+  * Hubungkan form yang telah kamu buat di dalam modal kamu ke path /create-ajax/.
+      * Buatlah fungsi javascript addProductEntry yang mengirimkan data form menggunakan metode POST via AJAX ke URL yang ditentukan, lalu setelah berhasil, memanggil fungsi refreshMoodEntries() untuk memperbarui daftar entri mood. Setelah pengiriman, form di-reset dan modal ditutup dengan klik otomatis pada elemen yang terkait dengan modal.
+      * Tambahkan event listener pada di modal form untuk menjalankan fungsi addProductEntry()
+  * Lakukan refresh pada halaman utama secara asinkronus untuk menampilkan daftar mood terbaru tanpa reload halaman utama secara keseluruhan.
+      * Panggil fungsi refreshProductEntries saat page di load dan saat fungsi addProductEntry dilakukan  
 
 <h1>TUGAS 5</h1>
 
