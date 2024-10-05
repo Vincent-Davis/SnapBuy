@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -117,9 +118,9 @@ def delete_product(request, id):
 @require_POST
 def add_product_entry_ajax(request):
     # Mengambil data dari POST request
-    nama = request.POST.get("nama")
+    nama = strip_tags(request.POST.get("nama"))
     price = request.POST.get("price")
-    description = request.POST.get("description")
+    description = strip_tags(request.POST.get("description"))
     produk_terjual = request.POST.get("produk_terjual")
     rating = request.POST.get("rating")
     user = request.user

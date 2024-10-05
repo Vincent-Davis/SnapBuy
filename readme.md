@@ -1,3 +1,22 @@
+<h1>TUGAS 6</h1>
+<h2>Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!</h2>
+  1. Interaktivitas dan Responsivitas: JavaScript memungkinkan pengembangan aplikasi web yang interaktif dan responsif. Dengan JavaScript, halaman web dapat bereaksi terhadap tindakan pengguna seperti klik, input, atau gerakan mouse tanpa perlu memuat ulang halaman. Ini menciptakan pengalaman yang lebih dinamis dan menarik, misalnya, dropdown menu, carousel, atau validasi formulir real-time.
+
+  2.Framework dan Library yang Mendukung: JavaScript memiliki ekosistem framework dan library yang luas, seperti React, Vue.js, dan Angular, yang sangat membantu dalam pengembangan aplikasi web modern. Dengan framework ini, pengembang dapat membangun antarmuka pengguna yang kompleks, mengelola state aplikasi dengan mudah, dan menciptakan komponen yang dapat digunakan kembali, mempercepat proses pengembangan.
+
+  3.Pemrograman Asinkron: JavaScript mendukung pemrograman asinkron melalui fitur seperti AJAX dan fetch API, yang memungkinkan aplikasi web mengambil data dari server tanpa harus memuat ulang halaman. Ini meningkatkan performa aplikasi, terutama untuk aplikasi yang memerlukan data real-time, seperti media sosial atau aplikasi peta, yang memberikan pengalaman pengguna yang lebih mulus.
+
+<h2>Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?</h2>
+Fungsi dari penggunaan await saat menggunakan fetch() adalah untuk menunggu hasil dari operasi asynchronous (dalam hal ini, permintaan HTTP menggunakan fetch()) sebelum melanjutkan eksekusi kode. Saat kita menggunakan await, JavaScript akan menghentikan sementara eksekusi kode di baris tersebut sampai permintaan fetch() selesai dan data respons sudah diterima, lalu mengembalikan hasilnya untuk diproses lebih lanjut.
+
+Jika await tidak digunakan, getProductEntries() akan mengembalikan Promise yang belum selesai, sehingga variabel productEntries berisi Promise alih-alih data produk. Hal ini menyebabkan kegagalan ketika mencoba melakukan iterasi dengan forEach(), karena Promise tidak bisa diiterasi. Akibatnya, UI tidak akan diperbarui dengan benar, dan elemen DOM tidak akan menampilkan data produk seperti yang diharapkan.
+
+<h2>Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?</h2>
+
+<h2>Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?</h2>
+<h2>Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!</h2>
+
+
 <h1>TUGAS 5</h1>
 
   <h2>Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!</h2>
